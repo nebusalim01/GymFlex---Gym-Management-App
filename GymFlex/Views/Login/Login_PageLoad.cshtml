@@ -1,0 +1,47 @@
+﻿@model GymFlex.Models.LoginModel
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-3">Login</h2>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-danger text-center">
+            @ViewBag.msg
+        </div>
+    }
+
+    <div class="card shadow p-4">
+
+        <form asp-action="Login_Click" asp-controller="Login" method="post">
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Login
+            </button>
+
+            <div class="text-center mt-3">
+                <a asp-controller="AdminReg" asp-action="AdminReg_Pageload">Admin Registration</a>
+                <span class="mx-2">|</span>
+                <a asp-controller="UserReg" asp-action="UserReg_Pageload">User Registration</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

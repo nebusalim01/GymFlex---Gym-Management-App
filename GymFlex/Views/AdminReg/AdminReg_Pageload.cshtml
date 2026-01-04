@@ -1,0 +1,62 @@
+﻿@model GymFlex.Models.AdminReg
+
+@{
+    ViewData["Title"] = "Admin Registration";
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-3">Admin Registration</h2>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info text-center">
+            @ViewBag.msg
+        </div>
+    }
+
+    <div class="card shadow p-4">
+
+        <form asp-action="AdminReg_Click" asp-controller="AdminReg" method="post">
+
+            <div class="mb-3">
+                <label>Name</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Phone</label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input asp-for="Password" type="password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Confirm Password</label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Register Admin
+            </button>
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
