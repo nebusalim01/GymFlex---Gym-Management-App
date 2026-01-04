@@ -12,7 +12,8 @@
         </span>
 
         <span class="text-white me-3">
-            Logged in as: @Model.Name
+            Logged in as:
+            @(Model != null && !string.IsNullOrEmpty(Model.Name) ? Model.Name : "Admin")
         </span>
     </nav>
 
@@ -27,37 +28,46 @@
             <ul class="nav flex-column">
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Admin" asp-action="AdminProfile_Pageload" asp-route-id="@Model.AdminId">
+                    <a class="nav-link"
+                       asp-controller="AdminProfile"
+                       asp-action="AdminProfile_Pageload"
+                       asp-route-id="@(Model?.AdminId)">
                         🧑‍💼 Profile
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" asp-controller="Admin" asp-action="ManageUsers">
+                    <a class="nav-link"
+                       asp-controller="AdminProfile"
+                       asp-action="ManageUsers">
                         👥 Manage Users
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link">
-                        🏋 Workout Plans
+                    <a class="nav-link"
+                       asp-controller="WorkoutPlan"
+                       asp-action="CreateWorkoutPlan_Pageload">
+                        🏋 Create Workout Plans
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link">
-                        🥗 Diet Plans
+                        🥗 Diet Plans (upcoming)
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link">
-                        🎯 Assign Plans
+                        🎯 Assign Plans (upcoming)
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link text-danger" asp-controller="Login" asp-action="Login_PageLoad">
+                    <a class="nav-link text-danger"
+                       asp-controller="Login"
+                       asp-action="Login_PageLoad">
                         🚪 Logout
                     </a>
                 </li>
@@ -71,50 +81,52 @@
             <h3>Admin Profile</h3>
             <hr />
 
-            <div class="row">
+            @if (Model == null || Model.AdminId == 0)
+            {
+                <div class="alert alert-danger">
+                    Admin profile failed to load.
+                </div>
+            }
+            else
+            {
+                <div class="row">
 
-                <div class="col-md-6">
+                    <div class="col-md-6">
 
-                    <div class="card shadow p-3">
+                        <div class="card shadow p-3">
 
-                        <h5 class="text-center mb-3">Profile Details</h5>
+                            <h5 class="text-center mb-3">Profile Details</h5>
 
-                        <p><b>Admin ID:</b> @Model.AdminId</p>
-                        <p><b>Name:</b> @Model.Name</p>
-                        <p><b>Phone:</b> @Model.Phone</p>
-                        <p><b>Email:</b> @Model.Email</p>
-                        <p><b>Created On:</b> @Model.CreatedAt</p>
+                            <p><b>Admin ID:</b> @Model.AdminId</p>
+                            <p><b>Name:</b> @Model.Name</p>
+                            <p><b>Phone:</b> @Model.Phone</p>
+                            <p><b>Email:</b> @Model.Email</p>
+                            <p><b>Created On:</b> @Model.CreatedAt</p>
 
-                        <div class="text-center mt-3">
-                            <button class="btn btn-primary" disabled>Edit Profile (Later)</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <div class="card shadow p-3 mb-3 bg-success text-white">
+                            <h5>Total Users</h5>
+                            <p>(Bind later)</p>
+                        </div>
+
+                        <div class="card shadow p-3 mb-3 bg-info text-white">
+                            <h5>Workout Plans</h5>
+                            <p>(Bind later)</p>
+                        </div>
+
+                        <div class="card shadow p-3 bg-warning text-white">
+                            <h5>Diet Plans</h5>
+                            <p>(Bind later)</p>
                         </div>
 
                     </div>
-                </div>
-
-                <!-- Stats Widgets -->
-                <div class="col-md-6">
-
-                    <div class="card shadow p-3 mb-3 bg-success text-white">
-                        <h5>Total Users</h5>
-                        <p>(We will bind count here later)</p>
-                    </div>
-
-                    <div class="card shadow p-3 mb-3 bg-info text-white">
-                        <h5>Workout Plans</h5>
-                        <p>(We will bind count here later)</p>
-                    </div>
-
-                    <div class="card shadow p-3 bg-warning text-white">
-                        <h5>Diet Plans</h5>
-                        <p>(We will bind count here later)</p>
-                    </div>
 
                 </div>
-
-            </div>
-
+            }
         </div>
-
     </div>
 </div>

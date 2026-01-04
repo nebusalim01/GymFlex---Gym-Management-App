@@ -19,5 +19,14 @@ namespace GymFlex.Controllers
 
             return View(admin);
         }
+        public IActionResult ManageUsers()
+        {
+            OperationsDB db = new OperationsDB();
+
+            var users = db.GetAllUsers();
+
+            return View(users);
+        }
+
     }
 }

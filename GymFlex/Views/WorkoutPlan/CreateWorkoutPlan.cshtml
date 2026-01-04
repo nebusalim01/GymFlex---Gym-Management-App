@@ -1,0 +1,60 @@
+﻿@model GymFlex.Models.WorkoutPlanModel
+
+<div class="container mt-4">
+
+    <h2 class="text-center">Create Workout Plan</h2>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info text-center">@ViewBag.msg</div>
+    }
+
+    <div class="card shadow p-4">
+
+        <form asp-action="CreateWorkoutPlan_Click" asp-controller="WorkoutPlan" method="post">
+
+            <div class="mb-3">
+                <label>Plan Name</label>
+                <input asp-for="Plan_Name" class="form-control" />
+                <span asp-validation-for="Plan_Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Goal Type</label>
+                <select asp-for="Goal_Type" class="form-control">
+                    <option value="">-- Select Goal --</option>
+                    <option>Weight Loss</option>
+                    <option>Weight Gain</option>
+                    <option>Maintain</option>
+                </select>
+                <span asp-validation-for="Goal_Type" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Level</label>
+                <select asp-for="Level" class="form-control">
+                    <option value="">-- Select Level --</option>
+                    <option>Beginner</option>
+                    <option>Intermediate</option>
+                    <option>Advanced</option>
+                </select>
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Duration (Days)</label>
+                <input asp-for="Duration_Days" class="form-control" />
+                <span asp-validation-for="Duration_Days" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-success w-100" type="submit">
+                Save Plan
+            </button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

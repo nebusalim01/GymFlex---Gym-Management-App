@@ -1,0 +1,40 @@
+﻿@model List<GymFlex.Models.UserListModel>
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-3">Manage Users</h2>
+
+    <table class="table table-bordered table-hover shadow">
+
+        <thead class="table-dark text-center">
+            <tr>
+                <th>User ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Height (cm)</th>
+                <th>Weight (kg)</th>
+                <th>BMI</th>
+                <th>Goal</th>
+                <th>Activity Level</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var u in Model)
+            {
+                <tr>
+                    <td>@u.User_Id</td>
+                    <td>@u.Name</td>
+                    <td>@u.Age</td>
+                    <td>@u.Height</td>
+                    <td>@u.Weight</td>
+                    <td>@u.BMI</td>
+                    <td>@u.Goal</td>
+                    <td>@u.Activity_Level</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+</div>

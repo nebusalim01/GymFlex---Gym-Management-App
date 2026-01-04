@@ -217,9 +217,11 @@ namespace GymFlex.Models
 
                 list.Add(u);
             }
+
             con.Close();
             return list;
         }
+
         public AdminProfileModel GetAdminProfile(int regId)
         {
             AdminProfileModel obj = new AdminProfileModel();
@@ -242,6 +244,22 @@ namespace GymFlex.Models
             }
             con.Close();
             return obj;
+        }
+        public int InsertWorkoutPlan(WorkoutPlanModel obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_InsertWorkoutPlan", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@pname", obj.Plan_Name);
+            cmd.Parameters.AddWithValue("@goal", obj.Goal_Type);
+            cmd.Parameters.AddWithValue("@level", obj.Level);
+            cmd.Parameters.AddWithValue("@days", obj.Duration_Days);
+
+            con.Open();
+            int rows = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return rows;
         }
 
     }
