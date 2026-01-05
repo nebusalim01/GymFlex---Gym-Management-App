@@ -31,5 +31,11 @@ namespace GymFlex.Controllers
 
             return View("CreateWorkoutPlan");
         }
+        public IActionResult ViewWorkoutPlans()
+        {
+            OperationsDB db = new OperationsDB();
+            var plans = db.GetWorkoutPlans();
+            return View(plans);
+        }
     }
 }

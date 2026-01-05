@@ -1,0 +1,65 @@
+﻿@model GymFlex.Models.AssignPlanModel
+@using System.Data
+
+<div class="container mt-4">
+
+    <h3>Assign Plan To User</h3>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info">@ViewBag.msg</div>
+    }
+
+    <div class="card p-4 shadow">
+
+        <form asp-action="AssignPlan_Click" asp-controller="AssignPlan" method="post">
+
+            <div class="mb-3">
+                <label>User</label>
+                <select asp-for="User_Id" class="form-control">
+                    <option value="">--Select User--</option>
+
+                    @foreach (DataRow row in ViewBag.Users.Rows)
+                    {
+                        <option value="@row["User_Id"]">
+                            @row["Name"]
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Workout Plan</label>
+                <select asp-for="Plan_Id" class="form-control">
+                    <option value="">--Select Workout Plan--</option>
+
+                    @foreach (DataRow row in ViewBag.WorkoutPlans.Rows)
+                    {
+                        <option value="@row["Plan_Id"]">
+                            @row["Plan_Name"]
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Diet Plan</label>
+                <select asp-for="Diet_Id" class="form-control">
+                    <option value="">--Select Diet Plan--</option>
+
+                    @foreach (DataRow row in ViewBag.DietPlans.Rows)
+                    {
+                        <option value="@row["Diet_Id"]">
+                            @row["Goal_Type"]
+                        </option>
+                    }
+                </select>
+            </div>
+
+            <button class="btn btn-primary w-100">Assign Plan</button>
+
+        </form>
+
+    </div>
+
+</div>

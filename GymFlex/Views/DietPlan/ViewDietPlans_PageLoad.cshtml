@@ -1,0 +1,29 @@
+﻿<div class="container mt-4">
+
+    <h3>Select Goal to View Diet Plan</h3>
+
+    <div class="card p-4 shadow">
+
+        <form asp-action="ViewDietPlans_Click" method="post">
+
+            <div class="mb-3">
+                <label>Goal Type</label>
+
+                <select name="goal" class="form-control">
+                    <option value="">--Select--</option>
+                    <option>Weight Loss</option>
+                    <option>Weight Gain</option>
+                    <option>Muscle Gain</option>
+                    <option>Maintenance</option>
+                </select>
+            </div>
+
+            <button class="btn btn-primary w-100">
+                View Diet Plan
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

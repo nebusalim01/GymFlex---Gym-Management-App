@@ -1,0 +1,36 @@
+﻿@model List<GymFlex.Models.WorkoutExerciseModel>
+
+<div class="container mt-4">
+
+    <h3>Exercises</h3>
+
+    <a class="btn btn-primary mb-3"
+       asp-controller="WorkoutExercise"
+       asp-action="AddExercise_PageLoad"
+       asp-route-dayId="@ViewBag.DayId">
+        ➕ Add New Exercise
+    </a>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Name</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Rest(sec)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>@e.Exercise_Name</td>
+                    <td>@e.Sets</td>
+                    <td>@e.Reps</td>
+                    <td>@e.Rest_Seconds</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

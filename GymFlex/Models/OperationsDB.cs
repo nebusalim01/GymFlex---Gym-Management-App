@@ -261,6 +261,248 @@ namespace GymFlex.Models
 
             return rows;
         }
+        public List<WorkoutPlanModel> GetWorkoutPlans()
+        {
+            List<WorkoutPlanModel> list = new List<WorkoutPlanModel>();
+
+            SqlCommand cmd = new SqlCommand("sp_GetWorkoutPlans", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                WorkoutPlanModel wp = new WorkoutPlanModel();
+
+                wp.Plan_Id = Convert.ToInt32(dr["Plan_Id"]);
+                wp.Plan_Name = dr["Plan_Name"].ToString();
+                wp.Duration_Days = Convert.ToInt32(dr["Duration_Days"]);
+                wp.Goal_Type = dr["Goal_Type"].ToString();
+                wp.Level = dr["Level"].ToString();
+
+                list.Add(wp);
+            }
+            con.Close();
+            return list;
+        }
+        public int InsertWorkoutDay(WorkoutDayModel obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_InsertWorkoutDay", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@planId", obj.Plan_Id);
+            cmd.Parameters.AddWithValue("@dayNo", obj.Day_Number);
+            cmd.Parameters.AddWithValue("@title", obj.Title);
+            cmd.Parameters.AddWithValue("@notes", obj.Notes);
+
+            con.Open();
+            int result = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return result;
+        }
+        public List<WorkoutDayModel> GetWorkoutDaysByPlan(int planId)
+        {
+            List<WorkoutDayModel> list = new List<WorkoutDayModel>();
+
+            SqlCommand cmd = new SqlCommand("sp_GetWorkoutDaysByPlan", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@planId", planId);
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                WorkoutDayModel obj = new WorkoutDayModel();
+
+                obj.Workoutday_Id = Convert.ToInt32(dr["Workoutday_Id"]);
+                obj.Plan_Id = Convert.ToInt32(dr["Plan_Id"]);
+                obj.Day_Number = Convert.ToInt32(dr["Day_Number"]);
+                obj.Title = dr["Title"].ToString();
+                obj.Notes = dr["Notes"].ToString();
+
+                list.Add(obj);
+            }
+
+            con.Close();
+            return list;
+        }
+        public int InsertWorkoutExercise(WorkoutExerciseModel obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_InsertWorkoutExercise", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@dayId", obj.Workoutday_Id);
+            cmd.Parameters.AddWithValue("@name", obj.Exercise_Name);
+            cmd.Parameters.AddWithValue("@sets", obj.Sets);
+            cmd.Parameters.AddWithValue("@reps", obj.Reps);
+            cmd.Parameters.AddWithValue("@rest", obj.Rest_Seconds);
+
+            con.Open();
+            int result = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return result;
+        }
+        public List<WorkoutExerciseModel> GetExercisesByDay(int dayId)
+        {
+            List<WorkoutExerciseModel> list = new List<WorkoutExerciseModel>();
+
+            SqlCommand cmd = new SqlCommand("sp_GetExercisesByDay", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@dayId", dayId);
+
+            con.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                WorkoutExerciseModel e = new WorkoutExerciseModel();
+
+                e.Exercise_Id = Convert.ToInt32(dr["Exercise_Id"]);
+                e.Workoutday_Id = Convert.ToInt32(dr["Workoutday_Id"]);
+                e.Exercise_Name = dr["Exercise_Name"].ToString();
+                e.Sets = Convert.ToInt32(dr["Sets"]);
+                e.Reps = dr["Reps"].ToString();
+                e.Rest_Seconds = Convert.ToInt32(dr["Rest_Seconds"]);
+
+                list.Add(e);
+            }
+
+            con.Close();
+            return list;
+        }
+        public int InsertDietPlan(DietPlanModel obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_InsertDietPlan", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@goal", obj.Goal_Type);
+            cmd.Parameters.AddWithValue("@day", obj.Day_Number);
+            cmd.Parameters.AddWithValue("@meal", obj.Meal_Type);
+            cmd.Parameters.AddWithValue("@food", obj.Food_Items);
+            cmd.Parameters.AddWithValue("@cal", obj.Calories);
+
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+
+            int i = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return i;
+        }
+        public List<DietPlanModel> GetDietPlansByGoal(string goal)
+        {
+            List<DietPlanModel> list = new List<DietPlanModel>();
+
+            SqlCommand cmd = new SqlCommand("sp_GetDietPlansByGoal", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@goal", goal);
+
+            if (con.State == ConnectionState.Closed)
+                con.Open();
+
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                DietPlanModel obj = new DietPlanModel();
+
+                obj.Diet_Id = Convert.ToInt32(dr["Diet_Id"]);
+                obj.Goal_Type = dr["Goal_Type"].ToString();
+                obj.Day_Number = Convert.ToInt32(dr["Day_Number"]);
+                obj.Meal_Type = dr["Meal_Type"].ToString();
+                obj.Food_Items = dr["Food_Items"].ToString();
+                obj.Calories = Convert.ToInt32(dr["Calories"]);
+
+                list.Add(obj);
+            }
+
+            con.Close();
+            return list;
+        }
+        public int AssignPlanToUser(AssignPlanModel obj)
+        {
+            SqlCommand cmd = new SqlCommand("sp_AssignPlanToUser", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@userId", obj.User_Id);
+            cmd.Parameters.AddWithValue("@planId", obj.Plan_Id);
+            cmd.Parameters.AddWithValue("@dietId", obj.Diet_Id);
+
+            con.Open();
+            int result = cmd.ExecuteNonQuery();
+            con.Close();
+
+            return result;
+        }
+        public DataTable GetUsers()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("sp_GetAllUserIds", con);
+            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public DataTable GetWorkoutPlans_DT()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("sp_GetWorkoutPlanList", con);
+            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+
+        public DataTable GetDietPlans()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("sp_GetDietPlanList", con);
+            da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            return dt;
+        }
+        public int GetTotalUsers()
+        {
+            SqlCommand cmd = new SqlCommand("sp_TotalUsers", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+
+            return count;
+        }
+
+        public int GetTotalWorkoutPlans()
+        {
+            SqlCommand cmd = new SqlCommand("sp_TotalWorkoutPlans", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+
+            return count;
+        }
+
+        public int GetTotalDietPlans()
+        {
+            SqlCommand cmd = new SqlCommand("sp_TotalDietPlans", con);
+            cmd.CommandType = CommandType.StoredProcedure;
+
+            con.Open();
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            con.Close();
+
+            return count;
+        }
 
     }
 }

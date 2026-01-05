@@ -1,0 +1,64 @@
+﻿@model GymFlex.Models.DietPlanModel
+
+<div class="container mt-4">
+
+    <h3>Add Diet Plan</h3>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info">@ViewBag.msg</div>
+    }
+
+    <div class="card p-4 shadow">
+
+        <form asp-action="AddDietPlan_Click" method="post">
+
+            <div class="mb-3">
+                <label>Goal Type</label>
+                <select asp-for="Goal_Type" class="form-control">
+                    <option value="">--Select--</option>
+                    <option>Weight Loss</option>
+                    <option>Weight Gain</option>
+                    <option>Muscle Gain</option>
+                    <option>Maintenance</option>
+                </select>
+                <span asp-validation-for="Goal_Type" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Day Number</label>
+                <input asp-for="Day_Number" class="form-control" />
+                <span asp-validation-for="Day_Number" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Meal Type</label>
+                <select asp-for="Meal_Type" class="form-control">
+                    <option>Breakfast</option>
+                    <option>Lunch</option>
+                    <option>Dinner</option>
+                    <option>Snacks</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label>Food Items</label>
+                <textarea asp-for="Food_Items" class="form-control"></textarea>
+                <span asp-validation-for="Food_Items" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Calories</label>
+                <input asp-for="Calories" class="form-control" />
+                <span asp-validation-for="Calories" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-success w-100">Save Diet Plan</button>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

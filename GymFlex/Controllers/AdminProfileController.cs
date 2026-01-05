@@ -17,6 +17,10 @@ namespace GymFlex.Controllers
                 admin = new AdminProfileModel();
             }
 
+            ViewBag.TotalUsers = db.GetTotalUsers();
+            ViewBag.TotalWorkoutPlans = db.GetTotalWorkoutPlans();
+            ViewBag.TotalDietPlans = db.GetTotalDietPlans();
+
             return View(admin);
         }
         public IActionResult ManageUsers()

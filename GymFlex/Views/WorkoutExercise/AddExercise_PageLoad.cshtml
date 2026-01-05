@@ -1,0 +1,46 @@
+﻿@model GymFlex.Models.WorkoutExerciseModel
+
+<div class="container mt-4">
+
+    <h3>Add Exercise</h3>
+
+    <div class="card p-4 shadow">
+
+        <form asp-action="AddExercise_Click" asp-controller="WorkoutExercise" method="post">
+
+            <input type="hidden" asp-for="Workoutday_Id" />
+
+            <div class="mb-3">
+                <label>Exercise Name</label>
+                <input asp-for="Exercise_Name" class="form-control" />
+                <span asp-validation-for="Exercise_Name" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Sets</label>
+                <input asp-for="Sets" class="form-control" />
+                <span asp-validation-for="Sets" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Reps</label>
+                <input asp-for="Reps" class="form-control" />
+                <span asp-validation-for="Reps" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Rest (Seconds)</label>
+                <input asp-for="Rest_Seconds" class="form-control" />
+                <span asp-validation-for="Rest_Seconds" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary w-100">Save Exercise</button>
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

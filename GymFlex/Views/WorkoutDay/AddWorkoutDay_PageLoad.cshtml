@@ -1,0 +1,46 @@
+﻿@model GymFlex.Models.WorkoutDayModel
+
+<div class="container mt-4">
+
+    <h3>Add Workout Day</h3>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info">@ViewBag.msg</div>
+    }
+
+    <div class="card p-4 shadow">
+
+        <form asp-action="AddWorkoutDay_Click" asp-controller="WorkoutDay" method="post">
+
+            <input type="hidden" asp-for="Plan_Id" />
+
+            <div class="mb-3">
+                <label>Day Number</label>
+                <input asp-for="Day_Number" class="form-control" />
+                <span asp-validation-for="Day_Number" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Title</label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label>Notes</label>
+                <textarea asp-for="Notes" class="form-control"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+            <button class="btn btn-primary w-100">Save Workout Day</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
