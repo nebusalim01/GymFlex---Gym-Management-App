@@ -1,0 +1,39 @@
+﻿@model List<GymFlex.Models.ExerciseViewModel>
+
+<div class="container mt-4">
+
+    <h3>💪 Exercises</h3>
+    <hr />
+
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>Exercise</th>
+                <th>Sets</th>
+                <th>Reps</th>
+                <th>Rest (seconds)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var e in Model)
+            {
+                <tr>
+                    <td>@e.Exercise_Name</td>
+                    <td>@e.Sets</td>
+                    <td>@e.Reps</td>
+                    <td>
+                        ⏱ @e.Rest_Seconds sec
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <a class="btn btn-secondary"
+       asp-controller="UserWorkout"
+       asp-action="ViewWorkoutDays"
+       asp-route-userId="@ViewBag.UserId">
+        ⬅ Back
+    </a>
+</div>

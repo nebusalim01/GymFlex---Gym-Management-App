@@ -1,0 +1,54 @@
+﻿@model GymFlex.Models.WorkoutProgressModel
+
+<div class="container mt-4">
+
+    <h3>🏋 @Model.ExerciseName</h3>
+    <p>Sets Planned: <b>@Model.SetsPlanned</b></p>
+
+    <h4 id="timer">00:00</h4>
+
+    <button class="btn btn-primary" onclick="startTimer()">▶ Start</button>
+
+    <hr />
+
+    <h5>⏳ Rest Timer</h5>
+    <p id="restTimer">Not started</p>
+
+    <button class="btn btn-warning" onclick="startRest()">Start Rest</button>
+
+    <hr />
+
+    <form method="post" asp-action="CompleteWorkout">
+        <input type="hidden" name="User_Id" value="@Model.User_Id" />
+        <input type="hidden" name="ExerciseName" value="@Model.ExerciseName" />
+        <input type="hidden" id="durationBox" name="DurationSeconds" />
+
+        <label>Sets Completed</label>
+        <input type="number" name="SetsCompleted" class="form-control" />
+
+        <button class="btn btn-success mt-2">✔ Mark Completed</button>
+    </form>
+</div>
+
+<script>
+    let seconds = 0;
+    let timerInterval;
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            seconds++;
+            document.getElementById("timer").innerText =
+                new Date(seconds * 1000).toISOString().substr(14, 5);
+            document.getElementById("durationBox").value = seconds;
+        }, 1000);
+    }
+
+    function startRest() {
+        let rest = 30;
+        let x = setInterval(() => {
+            document.getElementById("restTimer").innerText = rest + " sec";
+            rest--;
+            if (rest < 0) clearInterval(x);
+        }, 1000);
+    }
+</script>

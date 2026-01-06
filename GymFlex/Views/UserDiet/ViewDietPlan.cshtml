@@ -1,0 +1,36 @@
+﻿@model List<GymFlex.Models.DietDayModel>
+
+<div class="container mt-4">
+
+    <h3>Diet Plan (@ViewBag.Goal)</h3>
+    <hr />
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Day</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var d in Model)
+            {
+                <tr>
+                    <td>Day @d.Day_Number</td>
+
+                    <td>
+                        <a class="btn btn-success"
+                           asp-controller="UserDiet"
+                           asp-action="ViewDietMeals"
+                           asp-route-userId="@ViewBag.UserId"
+                           asp-route-day="@d.Day_Number">
+                            🍽 View Meals
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

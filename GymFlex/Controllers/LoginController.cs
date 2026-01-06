@@ -49,7 +49,7 @@ namespace GymFlex.Controllers
             }
             else if (role == "User")
             {
-                return RedirectToAction("UserProfile", "User", new { id = regId });
+                return RedirectToAction("UserProfile_PageLoad", "UserProfile", new { id = regId });
             }
             else
             {

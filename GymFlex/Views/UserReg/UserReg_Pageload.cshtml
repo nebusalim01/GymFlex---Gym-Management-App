@@ -1,0 +1,84 @@
+﻿@model GymFlex.Models.UserReg
+
+<div class="container mt-4">
+
+    <h2>User Registration</h2>
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info">@ViewBag.msg</div>
+    }
+
+    <form asp-action="UserReg_Click" method="post">
+
+        <div class="card p-4 shadow">
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <label>Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Age</label>
+                    <input asp-for="Age" class="form-control" />
+                    <span asp-validation-for="Age" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3">
+                    <label>Height (cm)</label>
+                    <input asp-for="Height" class="form-control" />
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <label>Weight (kg)</label>
+                    <input asp-for="Weight" class="form-control" />
+                </div>
+
+                <div class="col-md-4 mt-2">
+                    <label>Goal</label>
+                    <select asp-for="Goal" class="form-control">
+                        <option>Weight Loss</option>
+                        <option>Weight Gain</option>
+                        <option>Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mt-2">
+                    <label>Activity Level</label>
+                    <select asp-for="Activity_Level" class="form-control">
+                        <option>Low</option>
+                        <option>Moderate</option>
+                        <option>High</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <label>Email</label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <label>Password</label>
+                    <input asp-for="Password" type="password" class="form-control" />
+                </div>
+
+                <div class="col-md-3 mt-2">
+                    <label>Confirm Password</label>
+                    <input asp-for="ConfirmPassword" type="password" class="form-control" />
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary mt-3 w-100">Register</button>
+
+        </div>
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

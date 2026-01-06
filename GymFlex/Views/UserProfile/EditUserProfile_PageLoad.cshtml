@@ -1,0 +1,73 @@
+﻿@model GymFlex.Models.EditUserProfileModel
+
+<div class="container mt-4">
+
+    <h3>Edit Profile</h3>
+    <hr />
+
+    @if (ViewBag.msg != null)
+    {
+        <div class="alert alert-info">@ViewBag.msg</div>
+    }
+
+    <div class="card shadow p-4">
+
+        <form asp-action="EditUserProfile_Click" method="post">
+
+            <input type="hidden" asp-for="User_Id" />
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label>Name</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label>Age</label>
+                    <input asp-for="Age" class="form-control" />
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <label>Goal</label>
+                    <select asp-for="Goal" class="form-select">
+                        <option>Weight Loss</option>
+                        <option>Weight Gain</option>
+                        <option>Muscle Gain</option>
+                        <option>Maintenance</option>
+                    </select>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Height (cm)</label>
+                    <input asp-for="Height" class="form-control" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Weight (kg)</label>
+                    <input asp-for="Weight" class="form-control" />
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <label>Activity Level</label>
+                    <select asp-for="Activity_Level" class="form-select">
+                        <option>Sedentary</option>
+                        <option>Moderate</option>
+                        <option>Active</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <button class="btn btn-success w-100">💾 Save Changes</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

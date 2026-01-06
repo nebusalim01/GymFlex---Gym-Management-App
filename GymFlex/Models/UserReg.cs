@@ -4,45 +4,38 @@ namespace GymFlex.Models
 {
     public class UserReg
     {
-        public int User_Id { set; get; }
+        public int User_Id { get; set; }
 
         [Required(ErrorMessage = "Name is required")]
-        public string? Name { set; get; }
+        public string? Name { get; set; }
 
-        [Required(ErrorMessage = "Age is required")]
-        [Range(12, 80, ErrorMessage = "Age must be between 12 and 80")]
-        public int Age { set; get; }
+        [Required]
+        [Range(10, 100, ErrorMessage = "Enter valid age")]
+        public int Age { get; set; }
 
-        [Required(ErrorMessage = "Height is required")]
-        [Range(100, 250, ErrorMessage = "Height must be between 100 and 250 cm")]
-        public int Height { set; get; }   // cm
+        [Required]
+        public int Height { get; set; } // in cm
 
-        [Required(ErrorMessage = "Weight is required")]
-        [Range(20, 300, ErrorMessage = "Weight must be between 20 and 300 kg")]
-        public int Weight { set; get; }   // kg
+        [Required]
+        public int Weight { get; set; } // in kg
 
-        public float BMI { set; get; }    // calculated automatically
+        public double BMI { get; set; }
 
-        [Required(ErrorMessage = "Please select a goal")]
-        public string? Goal { set; get; }
+        [Required]
+        public string? Goal { get; set; }  // Weight Loss / Gain / Maintain
 
-        [Required(ErrorMessage = "Please select activity level")]
-        public string? Activity_Level { set; get; }
+        [Required]
+        public string? Activity_Level { get; set; }
 
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Enter a valid email address")]
-        public string? Email { set; get; }
+        [Required]
+        [EmailAddress]
+        public string? Email { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
+        [Required]
         [DataType(DataType.Password)]
-        public string? Password { set; get; }
+        public string? Password { get; set; }
 
-        [DataType(DataType.Password)]
-
-        [Required(ErrorMessage = "Reenter the Password")]
-        [Compare("Password", ErrorMessage = "Passwords do not match")]
-        public string? ConfirmPassword { set; get; }
-
-        public DateTime RegistrationDate { set; get; } = DateTime.Now;
+        [Compare("Password")]
+        public string? ConfirmPassword { get; set; }
     }
 }

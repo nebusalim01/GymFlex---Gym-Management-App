@@ -1,0 +1,26 @@
+﻿@model List<GymFlex.Models.WorkoutHistoryModel>
+
+<div class="container mt-4">
+
+    <h3>📊 Workout History</h3>
+    <hr />
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Exercise</th>
+            <th>Duration</th>
+            <th>Sets</th>
+            <th>Date</th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ExerciseName</td>
+                <td>@item.DurationSeconds sec</td>
+                <td>@item.SetsCompleted</td>
+                <td>@item.CompletedDate</td>
+            </tr>
+        }
+    </table>
+</div>
